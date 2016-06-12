@@ -65,10 +65,12 @@ IF NOT EXISTS (SELECT name FROM sys.filegroups WHERE is_default=1 AND name = N'P
 GO
 
 
+
+
 USE [SAR]
 GO
 
-/****** Object:  Table [dbo].[EQUIPOS]    Script Date: 21/05/2016 4:28:56 ******/
+/****** Object:  Table [dbo].[EQUIPOS]    Script Date: 31/05/2016 1:51:05 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -95,4 +97,72 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+USE [SAR]
+GO
 
+/****** Object:  Table [dbo].[RENIEC]    Script Date: 31/05/2016 1:51:12 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[RENIEC](
+	[dni] [char](8) NULL,
+	[nombre] [varchar](max) NULL,
+	[fecha_nacimiento] [varchar](10) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+USE [SAR]
+GO
+
+/****** Object:  Table [dbo].[T_COLABORADOR]    Script Date: 31/05/2016 1:51:36 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+SET ANSI_PADDING ON
+GO
+
+CREATE TABLE [dbo].[T_COLABORADOR](
+	[COD_COLABORADOR] [int] NOT NULL,
+	[NOM_COLABORADOR] [varchar](50) NULL,
+	[FEC_NACIMIENTO] [smalldatetime] NULL,
+	[FEC_INGRESO] [smalldatetime] NULL,
+	[CAR_COLABORADOR] [varchar](50) NULL,
+	[ESTADO] [varchar](50) NULL DEFAULT ('Activo'),
+PRIMARY KEY CLUSTERED 
+(
+	[COD_COLABORADOR] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+
+
+CREATE TABLE [dbo].[colaborador_equipo](
+	[cod_colaborador] [int] NOT NULL,
+	[nu_serie] char(8) NOT NULL,
+	[fecha_asignacion] [varchar](10) NULL,
+ CONSTRAINT [PK_cola_usu] PRIMARY KEY CLUSTERED 
+(
+	[cod_colaborador] ASC,
+	[nu_serie] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
